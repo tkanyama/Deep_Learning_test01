@@ -7,7 +7,7 @@ class jiscode():
         self.shift_jis = []
         self.jisx0208 = []
         self.unicode = []
-        with open("JIS0208.TXT", "r") as f:
+        with open("JIS0208.txt", "r") as f:
             for line in f:
                 if line[0] == "#":
                     pass
