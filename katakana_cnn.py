@@ -1,6 +1,8 @@
 import numpy as np
 import cv2, pickle
 from sklearn.model_selection import train_test_split
+import plaidml.keras
+plaidml.keras.install_backend()
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
@@ -8,9 +10,13 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.optimizers import RMSprop 
 from keras.datasets import mnist
 import matplotlib.pyplot as plt
+from os.path import expanduser
+home = expanduser("~")
+import time
+t0 = time.time()
 
 # データファイルと画像サイズの指定
-data_file = "ETL1/png-etl1/katakana.pickle"
+data_file = home + "/ETL/ETL1/png-etl1/katakana.pickle"
 im_size = 25
 out_size = 46 # ア-ンまでの文字の数
 im_color = 1 # 画像の色空間/グレイスケール
@@ -59,10 +65,11 @@ hist = model.fit(x_train, y_train,
           verbose=1,
           validation_data=(x_test, y_test))
 # モデルを評価
-model.save('etl1_model.h5')
-model.save_weights('etl1_weight.h5')
+model.save(home + '/ETL/ETL1/etl1_model.h5')
+model.save_weights(home + '/ETL/ETL1/etl1_weight.h5')
 score = model.evaluate(x_test, y_test, verbose=1)
 print('正解率=', score[1], 'loss=', score[0])
+print('time={}sec'.format(time.time() - t0))
 
 # 学習の様子をグラフへ描画 --- (*5)
 # 正解率の推移をプロット
