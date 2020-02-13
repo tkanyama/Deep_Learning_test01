@@ -2,10 +2,12 @@ import glob
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-import pickle
+import pickle,os
 
+home = os.path.expanduser('~') + '/ETL/ETL1'
+out_dir = home + "/ETL1/png-etl1/"
 # 保存先や画像サイズの指定 --- (*1)
-out_dir = "ETL1/png-etl1" # 画像データがあるディレクトリ
+# out_dir = "ETL1/png-etl1" # 画像データがあるディレクトリ
 im_size = 25 # 画像サイズ
 save_file = out_dir + "/katakana.pickle" # 保存先
 plt.figure(figsize=(9, 17)) # 出力画像を大きくする
